@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>csdn_export_md</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <p>一、题目<br>
+基于Mysql、.NET Framework的超市数据管理系统。<br>
+二、需求分析<br>
+在现代化生活之中，超市已经成为人们生活之中密不可分的一个场所，随着经济的发展，生活水平的提高，超市日常的销售记录变得尤为庞大，过去传统的通过人工来管理大型的超市销售和经营在当今市场上尤为吃力，因此需要通过数据库系统来管理超市中巨大的数据信息。同时，目前来说，网络已经遍及生活的每一处，人们开始习惯于利用网络来购物，因此，本次系统设计一个适合超市管理员来管理超市信息以及便于用户购买的数据库管理简易系统。<br>
+<img src="https://img-blog.csdnimg.cn/2020123112224916.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xoMjAxOGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>图  1 需求图<br>
+本系统的需求如上图所示，具体分析如下：<br>
+	采购商品：超市日常的采购、进货商品<br>
+	订单管理：对采购商品的订单进行管理<br>
+	商品管理：超市进货商品的库存量、日期等信息管理<br>
+	销售管理：超市日常销售记录管理<br>
+	购买商品：用户利用该系统进行购买商品<br>
+	用户管理：对使用该系统的非管理员用户进行信息管理<br>
+	用户充值：用户账号余额充值<br>
+对应的数据结构分析如下：<br>
+数据结构名	含义说明	组成<br>
+商品	记录商品的基本信息	商品号、商品名、单价、库存量、供应商<br>
+用户	记录用户给个人信息	用户账号、用户名、密码、年龄、余额<br>
+管理员	记录管理员个人信息	管理员账号、管理员名、密码、年龄<br>
+销售记录	记录销售情况信息	流水号、商品号、销售价、日期<br>
+购买记录	记录用户购买信息	流水号、商品号、商品名、商品价、日期<br>
+订单	记录采购信息	订单号、订单价、供应商、日期、商品号</p>
+<p>三、系统设计（包括数据库的概念结构设计、逻辑结构设计等）<br>
+数据库概念结构设计<br>
+通过对实际生活的需求分析处理，得到对应的E-R图如下：<br>
+<img src="https://img-blog.csdnimg.cn/20201231122312905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xoMjAxOGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>图  2 超市系统数据库概念结构E-R图<br>
+<img src="https://img-blog.csdnimg.cn/20201231122808737.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xoMjAxOGk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre><code>数据库逻辑结构设计
+</code></pre>
+<p>将数据库概念结构E-R模型进行向逻辑结构转换，对应结果如下：<br>
+	 Admin表<br>
+管理员(管理员账号,管理员姓名，管理员密码，管理员年龄)<br>
+表结构如图 所示<br>
+<img src="https://img-blog.csdnimg.cn/20201231122349459.png" alt="在这里插入图片描述"></p>
+<p>图  3 Admin表结构<br>
+	Buyrecode表<br>
+购买记录表(购买记录号，商品号，商品价格，购买日期)<br>
+表结构如图4所示<br>
+<img src="https://img-blog.csdnimg.cn/2020123112240063.png" alt="在这里插入图片描述"></p>
+<p>图  4 Buyrecode表结构<br>
+	Goods表<br>
+商品表(商品号，商品名，商品价格，商品库存，供应商)<br>
+表结构如图5所示<br>
+<img src="https://img-blog.csdnimg.cn/20201231122407302.png" alt="在这里插入图片描述"></p>
+<p>图  5 goods表结构<br>
+	Orders表<br>
+订单表(订单号，订单价格，供应商，日期，商品号)<br>
+表结构如图6所示<br>
+<img src="https://img-blog.csdnimg.cn/20201231122419439.png" alt="在这里插入图片描述"></p>
+<p>图  6 orders表结构<br>
+	Sale表<br>
+销售表(流水号、商品号、商品名、销售价、日期)<br>
+表结构如图6所示<br>
+<img src="https://img-blog.csdnimg.cn/20201231122443362.png" alt="在这里插入图片描述"></p>
+<p>图  7 sale表结构<br>
+	User表<br>
+用户表(用户号、用户名、用户密码、用户年龄、余额) 表结构如下：<br>
+<img src="https://img-blog.csdnimg.cn/20201231122450399.png" alt="在这里插入图片描述"></p>
+<p>图  8 user表结构<br>
+数据库安全性设计</p>
+<ol>
+<li>用户身份鉴别方式<br>
+超市管理数据库系统使用静态口令的方式进行鉴别，其中静态口令保存在用户信息中。虽然静态口令的安全性较低，但是一种常用且简单的身份鉴别方式。</li>
+<li>存取控制<br>
+超市管理系统通过自主存取控制，其中分为两类用户，其中普通用户只能对商品表、购买记录表、个人用户表、和销售记录表进行添加、修改操作，而管理员用户则是享有所有表的存取控制权限。</li>
+<li>视图机制<br>
+超市管理系统对普通用户使用视图机制，将部分无需向用户呈现的数据进行隐藏。如在用户购物之中和购买记录中的数据是从数据视图中获取。</li>
+</ol>
+<p>四、系统实现（包括数据库管理系统、开发平台与工具、开发语言等）</p>
+<pre><code>数据库管理系统实现
+</code></pre>
+<p>利用Mysql语句按照上述数据库分析的逻辑结构分别创建对应的表和字段，并设置对应的实体完整性和参照完整性。<br>
+超市管理系统实现</p>
+<ol>
+<li>数据库连接<br>
+创建一个dao类和daouser类分别为普通用户和管理员用户连接数据库，其中dao类连接通过数据库的root用户访问数据库，而daouser类通过创建数据库user用户访问数据库。其中在设计数据库连接时，利用MySqlConnection类进行连接数据库，MysqlCmomandSQL代表Mysql语句，DataReader代表读取数据库数据，Excute()进行Mysql语句执行，Dao类具体设计代码如下：</li>
+</ol>
+<pre><code class="prism language-csharp"><span class="token number">01</span> <span class="token keyword">class</span> <span class="token class-name">Dao</span>
+<span class="token number">02</span> <span class="token punctuation">{</span>   <span class="token class-name">MySqlConnection</span> conn<span class="token punctuation">;</span>
+<span class="token number">03</span>     <span class="token keyword">public</span> <span class="token class-name">MySqlConnection</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">04</span>     <span class="token punctuation">{</span>   <span class="token keyword">string</span> connStr <span class="token operator">=</span> "server <span class="token operator">=</span> localhost<span class="token punctuation">;</span> user <span class="token operator">=</span> root<span class="token punctuation">;</span> database <span class="token operator">=</span> market<span class="token punctuation">;</span> port <span class="token operator">=</span> 
+<span class="token number">05</span>         <span class="token number">3306</span><span class="token punctuation">;</span> password <span class="token operator">=</span> <span class="token number">1234</span>"<span class="token punctuation">;</span>
+<span class="token number">06</span>         conn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MySqlConnection</span><span class="token punctuation">(</span>connStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">07</span>         <span class="token keyword">try</span>
+<span class="token number">08</span>         <span class="token punctuation">{</span>   conn<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">09</span>         <span class="token punctuation">}</span>
+<span class="token number">10</span>         <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token number">11</span>         <span class="token punctuation">{</span>   Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">12</span>         <span class="token punctuation">}</span>
+<span class="token number">13</span>         <span class="token keyword">return</span> conn<span class="token punctuation">;</span>
+<span class="token number">14</span>     <span class="token punctuation">}</span>
+<span class="token number">15</span>     <span class="token keyword">public</span> <span class="token class-name">MySqlCommand</span> <span class="token function">command</span><span class="token punctuation">(</span><span class="token keyword">string</span> sql<span class="token punctuation">)</span>
+<span class="token number">16</span>     <span class="token punctuation">{</span>   <span class="token class-name">MySqlCommand</span> cmd <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MySqlCommand</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">17</span>         <span class="token keyword">return</span> cmd<span class="token punctuation">;</span>
+<span class="token number">18</span>     <span class="token punctuation">}</span>
+<span class="token number">19</span>     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">Execute</span><span class="token punctuation">(</span><span class="token keyword">string</span> sql<span class="token punctuation">)</span>
+<span class="token number">20</span>     <span class="token punctuation">{</span>   <span class="token keyword">return</span> <span class="token function">command</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ExecuteNonQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">21</span>     <span class="token punctuation">}</span>
+<span class="token number">22</span>     <span class="token keyword">public</span> <span class="token class-name">MySqlDataReader</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">string</span> sql<span class="token punctuation">)</span>
+<span class="token number">23</span>     <span class="token punctuation">{</span>   <span class="token keyword">return</span> <span class="token function">command</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ExecuteReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">24</span>     <span class="token punctuation">}</span>
+<span class="token number">25</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Daoclose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">26</span>     <span class="token punctuation">{</span>   conn<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">27</span>     <span class="token punctuation">}</span>
+<span class="token number">28</span> 
+<span class="token number">29</span> <span class="token punctuation">}</span>
+</code></pre>
+<ol start="2">
+<li>前端窗口设计<br>
+超市管理系统基于.NET Framework进行开发，通过窗口拖动相关控件对前端窗口进行设计布局，如在读取超市管理系统的销售记录时，通过DataGridView控件从数据库读取数据进行显示，利用label、button、文本框等控件对相关的业务功能(如数据修改、数据查询、数据删除和增加数据等功能)进行实现，其中在销售记录管理中使用日期控件控制记录，从而对当前日期的销售记录查询和简单统计。</li>
+<li>对应逻辑功能实现<br>
+系统中的主要逻辑功能有：数据查询、增加数据、删除数据、修改数据以及统计数据五大功能，对应的功能实现分别如下：</li>
+</ol>
+<pre><code class="prism language-sql"><span class="token number">01</span> DialogResult dr <span class="token operator">=</span> MessageBox<span class="token punctuation">.</span><span class="token keyword">Show</span><span class="token punctuation">(</span><span class="token string">"确认修改该用户"</span> <span class="token operator">+</span><span class="token string">"？"</span><span class="token punctuation">,</span> <span class="token string">"信息提示"</span><span class="token punctuation">,</span> MessageBoxButtons<span class="token punctuation">.</span>OKCancel<span class="token punctuation">,</span> 
+<span class="token number">02</span>                   MessageBoxIcon<span class="token punctuation">.</span>Question<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">03</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dr <span class="token operator">=</span><span class="token operator">=</span> DialogResult<span class="token punctuation">.</span>OK<span class="token punctuation">)</span> {
+<span class="token number">04</span>     Dao dao <span class="token operator">=</span> new Dao<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">05</span>     string <span class="token keyword">sql</span> <span class="token operator">=</span> $<span class="token string">"update user set uid='{uid}', uname='{uname }',upsw= '{upsw}', uage='{uage}',balance= '{blance}')"</span><span class="token punctuation">;</span>
+<span class="token number">06</span>                  <span class="token comment">//数据库执行对应的语句</span>
+<span class="token number">07</span>     <span class="token keyword">int</span> n <span class="token operator">=</span> dao<span class="token punctuation">.</span><span class="token keyword">Execute</span><span class="token punctuation">(</span><span class="token keyword">sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">08</span>     <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> {
+<span class="token number">09</span>         MessageBox<span class="token punctuation">.</span><span class="token keyword">Show</span><span class="token punctuation">(</span><span class="token string">"修改成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">10</span>     } <span class="token keyword">else</span> {
+<span class="token number">11</span>         MessageBox<span class="token punctuation">.</span><span class="token keyword">Show</span><span class="token punctuation">(</span><span class="token string">"修改失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">12</span>     }
+<span class="token number">13</span> }
+</code></pre>
+<p>对于数据的增删查改和统计显示五个功能，基本的执行框架都是一致的，相应代码如上所示，不同的是数据库Mysql的执行语句不一样，因此修改对应的Mysql语句即可，对应语句如下(以用户管理功能为例)：<br>
+	数据查询：string sql = $“select * from user where uid =’{textBox1.Text}’ or uname =’{textBox1.Text}’”;//textBox1.Text即输入框条件<br>
+	增加数据：string sql = $“insert into user values(’{uid}’, ‘{uname }’, ‘{upsw}’, ‘{uage}’, ‘{blance}’)”;<br>
+	删除数据：string sql = $“delete from user where uid=’{uid}’”;<br>
+	修改数据：string sql = $“update user set uid=’{uid}’, uname=’{uname }’,upsw= ‘{upsw}’, uage=’{uage}’,balance= ‘{blance}’)”;//数据库执行对应的语句<br>
+	统计数据(以销售记录统计为例)：<br>
+string sql = $“select sum(sprice) from sale where date like ‘%{year}%’”;<br>
+string sql1 = $“select sum(sprice) from sale where date like ‘%{year}-{month}%’”;<br>
+string sql2 = $“select sum(sprice) from sale where date like ‘%{year}-{month}-{Day}%’”;<br>
+开发平台与工具<br>
+本系统基于Windows平台开发，使用Navicat Premium、Visual Studio 2019、Mysql8.0开发工具进行开发。<br>
+开发语言<br>
+本系统数据库开发语言：Mysql.<br>
+本系统功能开发语言：C#.</p>
+<p>五、使用说明<br>
+超市管理系统使用说明<br>
+本系统平台用户初始登录用户名：user密码：user.管理员用户名：admin,管理员密码：admin.<br>
+软件初始界面为登录界面，输入用户名或管理员用户名分别进入用户界面和管理员界面。其中用户界面有主窗口显示用户个人信息，菜单栏有：购买商品、购买记录、账号充值、退出等选项。分别实现以下功能：<br>
+购买商品：用户可利用此功能进行查询商品、购买商品。<br>
+购买记录：用户可利用此功能查询自己的购买历史记录。<br>
+账号充值：用户可利用此功能来对自己账户余额进行充值。<br>
+退出：退出用户界面。<br>
+而管理员界面菜单栏有商品管理、用户管理、订单管理、销售管理以及退出选项，分别实现以下功能:<br>
+商品管理：管理员通过此功能进行商品的增加、修改、删除、查询等功能。<br>
+用户管理：管理员通过此功能进行普通用户账号信息的增加、修改、删除、查询等功能。<br>
+订单管理：管理员通过此功能进行与供应商订单信息的增加、修改、删除、查询等功能。<br>
+销售管理：管理员可通过此功能进行销售记录的查询、时间内销售额的统计分析等功能。<br>
+退出：退出管理员界面。</p>
+
+    </div>
+  </div>
+</body>
+
+</html>
